@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: Example Express API
+  description: API demonstrating basic CRUD operations and simple routes
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /data:
+    get:
+      summary: Get all user data
+      responses:
+        '200':
+          description: Returns an array of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Data'
+
+    post:
+      summary: Add a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Data'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Data'
+        '415':
+          description: Unsupported Media Type
+
+  /data/search:
+    post:
+      summary: Return an array of users that fit the query criteria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                forename:
+                  type: string
+                  example: Tim
+                surname:
+                  type: string
+                  example: Berners-Lee
+      responses:
+        '200':
+          description: Users fitting query found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Data'
+        '404':
+          description: No users found fitting the query
+  /data/{id}:
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+
+    put:
+      summary: Update an existing user or create a new one
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Data'
+      responses:
+        '200':
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Data'
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Data'
+        '415':
+          description: Unsupported Media Type
+
+components:
+  schemas:
+    Data:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        forename:
+          type: string
+          example: Tim
+        surname:
+          type: string
+          example: Berners-Lee
