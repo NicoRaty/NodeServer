@@ -6,3 +6,42 @@ GET http://localhost:3000/data
 
 ### test GET /index
 GET http://localhost:3000/index
+
+### test POST /data
+POST http://localhost:3000/data
+Content-Type: application/json
+
+{
+  "id": 3,
+  "forename": "Nico",
+  "surname": "Räty"
+}
+
+### test DELETE /data/3
+DELETE http://localhost:3000/data/3
+
+### test PUT /data/2
+PUT http://localhost:3000/data/2
+Content-Type: application/json
+
+{
+  "forename": "Matti",
+  "surname": "Nykänen"
+}
+
+### test PUT /data/3
+PUT http://localhost:3000/data/3
+Content-Type: application/json
+
+{
+  "forename": "Matti",
+  "surname": "Nykänen"
+}
+
+### test SEARCH /data/Nykänen
+POST http://localhost:3000/data/search
+Content-Type: application/json
+
+{
+  "surname": "Nykänen"
+}
