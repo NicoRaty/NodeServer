@@ -110,6 +110,32 @@ paths:
                 $ref: '#/components/schemas/Data'
         '415':
           description: Unsupported Media Type
+  /login:
+    post:
+      summary: Post login request with credentials
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Tim
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+              
+        '401':
+          description: Login failed
 
 components:
   schemas:
@@ -125,3 +151,18 @@ components:
         surname:
           type: string
           example: Berners-Lee
+    LoginResponse:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Tim
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5yIiwiaWF0IjoxNzYzNjM0NzEwLCJleHAiOjE3NjM2MzgzMTB9.EBUFa7LwZgvjIDIWXG4HdM7prK-b7x-rueLO7_e1Cgw
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: string
+          example: 1h

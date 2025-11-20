@@ -3,6 +3,8 @@ GET http://localhost:3000/
 
 ### test GET /data
 GET http://localhost:3000/data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5yIiwiaWF0IjoxNzYzNjM1ODY5LCJleHAiOjE3NjM2Mzk0Njl9.Gm1gNA5--OeSsBFOHP0OHUTp88KTHCL2Mkn_ctt_LZM
+Accept: application/json
 
 ### test GET /index
 GET http://localhost:3000/index
@@ -44,4 +46,13 @@ Content-Type: application/json
 
 {
   "surname": "Nykänen"
+}
+
+### test login POST and get token
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username":"nr",
+  "password":"sala"
 }
